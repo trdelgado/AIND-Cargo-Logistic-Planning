@@ -246,7 +246,15 @@ class AirCargoProblem(Problem):
         """
         # TODO implement (see Russell-Norvig Ed-3 10.2.3  or Russell-Norvig Ed-2 11.2)
         count = 0
-        return count
+        num = 0
+
+        for fluent in self.state_map:
+            if fluent in self.goal:
+                if node.state[count] == 'F':
+                    num += 1
+            count += 1
+
+        return num
 
 
 def air_cargo_p1() -> AirCargoProblem:
@@ -351,29 +359,21 @@ def air_cargo_p3() -> AirCargoProblem:
            expr('At(C1, ORD)'),
            expr('In(C1, P1)'),
            expr('In(C1, P2)'),
-           expr('In(C1, P3)'),
-           expr('In(C1, P4)'),
            expr('At(C2, SFO)'),
            expr('At(C2, ATL)'),
            expr('At(C2, ORD)'),
            expr('In(C2, P1)'),
            expr('In(C2, P2)'),
-           expr('In(C2, P3)'),
-           expr('In(C2, P4)'),
            expr('At(C3, SFO)'),
            expr('At(C3, JFK)'),
            expr('At(C3, ORD)'),
            expr('In(C3, P1)'),
            expr('In(C3, P2)'),
-           expr('In(C3, P3)'),
-           expr('In(C3, P4)'),
            expr('At(C4, SFO)'),
            expr('At(C4, JFK)'),
            expr('At(C4, ATL)'),
            expr('In(C4, P1)'),
            expr('In(C4, P2)'),
-           expr('In(C4, P3)'),
-           expr('In(C4, P4)'),
            expr('At(P1, JFK)'),
            expr('At(P1, ATL)'),
            expr('At(P1, ORD)'),
