@@ -165,6 +165,7 @@ class AirCargoProblem(Problem):
 
             # Loop through all negative preconditions
             for clause in action.precond_neg:
+
                 # Check if clause in knowledgebase to test if valid action
                 if clause in kb.clauses:
                     is_possible = False
@@ -186,9 +187,12 @@ class AirCargoProblem(Problem):
         :return: resulting state after action
         """
         # TODO implement
+
+        # Initialize states
         new_state = FluentState([], [])
         old_state = decode_state(state, self.state_map)
 
+        # Loop through fluents and check if fluent resides in aftermath
         for fluent in old_state.pos:
             if fluent not in action.effect_rem:
                 new_state.pos.append(fluent)
@@ -248,12 +252,22 @@ class AirCargoProblem(Problem):
         count = 0
         num = 0
 
+        # Loop through each fluent in the state map
         for fluent in self.state_map:
+
+            # Check if fluent is a goal
             if fluent in self.goal:
+
+                # Check if state of the node is false 
                 if node.state[count] == 'F':
+
+                    # Increment num
                     num += 1
+
+            # Count keeps track location of the fluent with respect to the Node string
             count += 1
 
+        # Return num of goals yet to be achieved
         return num
 
 
